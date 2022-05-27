@@ -48,5 +48,15 @@ namespace AllSpice.Services
             _repo.Edit(original);
             return GetById(original.Id);
         }
+
+        internal void Delete(int id, string userId)
+        {
+            Recipe recipe = GetById(id);
+            if (recipe.CreatorId != userId)
+            {
+                throw new Exception("You do not own this Recipe.");
+            }
+            _repo.Delete(id);
+        }
     }
 }

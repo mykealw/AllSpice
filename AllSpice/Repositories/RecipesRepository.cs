@@ -70,5 +70,11 @@ category = @Category
 WHERE id = @Id;";
             _db.Execute(sql, original);
         }
+
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM recipes WHERE id = @id LIMIT 1;";
+            _db.Execute(sql, new { id });
+        }
     }
 }
