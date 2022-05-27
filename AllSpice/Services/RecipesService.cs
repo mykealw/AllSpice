@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using AllSpice.Models;
 using AllSpice.Repositories;
 
 namespace AllSpice.Services
@@ -8,6 +11,42 @@ namespace AllSpice.Services
         public RecipesService(RecipesRepository repo)
         {
             _repo = repo;
+        }
+
+        internal List<Recipe> GetRecipe()
+        {
+            return _repo.GetRecipe();
+        }
+
+        internal Recipe GetById(int id)
+        {
+            Recipe recipe = _repo.GetById(id);
+            if (recipe == null)
+            {
+                throw new Exception("Invalid Recipe Id");
+            }
+            return recipe;
+        }
+
+        internal Recipe Create(Recipe recipeData)
+        {
+            return _repo.Create(recipeData);
+        }
+
+        internal Recipe Edit(Recipe recipeData)
+        {
+            Recipe original = GetById(recipeData.Id);
+            if (original.CreatorId != recipeData.CreatorId)
+            {
+                throw new Exception("You do not own this Recipe.");
+            }
+            original.Picture = recipeData.Picture ?? original.Picture;
+            original.Title = recipeData.Title ?? original.Title;
+            original.Subtitle = recipeData.Subtitle ?? original.Subtitle;
+            original.Category = recipeData.Category ?? original.Category;
+
+            _repo.Edit(original);
+            return GetById(original.Id);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace AllSpice.Models
         public int Position { get; set; }
         public string Body { get; set; }
         public int RecipeId { get; set; }
+        public Account Creator { get; set; }
     }
 }
