@@ -25,7 +25,7 @@ namespace AllSpice.Controllers
             _ingrs = ingrs;
             _ss = ss;
         }
-
+        //GETS SELF => RELATIONSHIPS
         [HttpGet]
         public ActionResult<List<Recipe>> GetRecipe()
         {
@@ -53,7 +53,21 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        // RELATIONSHIPS 
+        [HttpGet("{id}/ingredients")]
+        public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int id)
+        {
+            try
+            {
+                List<Ingredient> ingredient = _rs.GetIngredientsByRecipe(id);
+                return Ok(ingredient);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        //POSTS
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Recipe>> Create([FromBody] Recipe recipeData)
@@ -71,7 +85,7 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        //PUTS
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Recipe>> Edit(int id, [FromBody] Recipe recipeData)
@@ -89,7 +103,7 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        //DELETES
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<ActionResult<String>> Delete(int id)
@@ -99,20 +113,6 @@ namespace AllSpice.Controllers
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 _rs.Delete(id, userInfo.Id);
                 return Ok("Recipe Deleted");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
-        [HttpGet("{id}/ingredients")]
-        public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int id)
-        {
-            try
-            {
-                List<Ingredient> ingredient = _rs.GetIngredientsByRecipe(id);
-                return Ok(ingredient);
             }
             catch (Exception e)
             {

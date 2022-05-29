@@ -13,12 +13,10 @@ namespace AllSpice.Controllers
     public class IngredientsController : ControllerBase
     {
         private readonly IngredientsService _ingrs;
-        private readonly RecipesService _rs;
 
         public IngredientsController(IngredientsService ingrs, RecipesService rs)
         {
             _ingrs = ingrs;
-            _rs = rs;
         }
 
         [HttpPost]
