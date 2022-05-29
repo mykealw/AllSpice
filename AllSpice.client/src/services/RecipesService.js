@@ -16,6 +16,12 @@ class RecipesService {
         logger.log(AppState.myRecipes, "my recipes")
     }
 
+    async getActiveRecipe(recipeId) {
+        const res = await api.get('api/recipes/' + recipeId)
+        logger.log(res.data, "active recipe")
+        AppState.activeRecipe = res.data
+    }
+
     async createRecipe(recipeData) {
         const res = await api.post('api/recipes' + recipeData)
         logger.log(res.data, "recipe made")
@@ -30,13 +36,20 @@ class RecipesService {
         AppState.myRecipes = AppState.myRecipes.filter(r => r.id != id)
     }
 
-    async favorite(id) {
-        const res = await api.post('api/favorites' + id)
+    async createFavorite(body) {
+        const res = await api.post('api/favorites', body)
         loggger.log(res.data, "favorited")
         AppState.favorites.unshift(res.data)
+        AppState.myFavorites.unshift(res.data)
+    }
 
+    async deleteFavorite(id) {
+        const res = await api.delete('api/favorites' + id)
+        logger.log(res.data, "deleted fav")
+        AppState.favorites = AppState.favorites.filter(f => f.id != id)
+        AppState.myFavorites = AppState.myFavorites.filter(f => f.id != id)
     }
 }
-}
+
 
 export const recipesService = new RecipesService()
