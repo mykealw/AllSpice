@@ -15,6 +15,8 @@ namespace AllSpice.Repositories
             _db = db;
         }
 
+
+        // GETS SELF => RELATIONSHIPS
         internal List<Recipe> GetRecipe()
         {
             string sql = @"
@@ -46,18 +48,33 @@ namespace AllSpice.Repositories
                 return recipes;
             }, new { id }).FirstOrDefault();
         }
+
+        // RELATIONSHIPS HERE
+        internal List<Ingredient> GetIngredientsByRecipe(int id)
+        {
+            string sql = @"
+            SELECT i.*
+            FROM ingredients i
+            WHERE i.recipeID = @id;";
+            return _db.Query<Ingredient>(sql, new { id }).ToList();
+        }
+
+
+        // POSTS
         internal Recipe Create(Recipe recipeData)
         {
             string sql = @"
             INSERT INTO recipes
             (picture, title, subtitle, category, creatorId)
             VALUES
-(@picture, @title, @subtitle, @category, @creatorId);
+            (@picture, @title, @subtitle, @category, @creatorId);
             SELECT LAST_INSERT_ID();";
             recipeData.Id = _db.ExecuteScalar<int>(sql, recipeData);
             return recipeData;
         }
 
+
+        //PUTS
         internal void Edit(Recipe original)
         {
             string sql = @"
@@ -71,6 +88,8 @@ namespace AllSpice.Repositories
             _db.Execute(sql, original);
         }
 
+
+        //DELETES
         internal void Delete(int id)
         {
             string sql = "DELETE FROM recipes WHERE id = @id LIMIT 1;";

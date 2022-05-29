@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using AllSpice.Models;
 using Dapper;
@@ -24,5 +25,15 @@ namespace AllSpice.Repositories
             ingredientData.Id = _db.ExecuteScalar<int>(sql, ingredientData);
             return ingredientData;
         }
+
+        // internal Ingredient Get(int id)
+        // {
+        //     string sql = @"
+        //     SELECT
+        //     a.*,
+        //     i.*
+        //     FROM ingredients i
+        //     JOIN accounts a"
+        // }
     }
 }
