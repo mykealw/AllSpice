@@ -1,3 +1,4 @@
+using AllSpice.Models;
 using AllSpice.Repositories;
 
 namespace AllSpice.Services
@@ -8,6 +9,11 @@ namespace AllSpice.Services
         public IngredientsService(IngredientsRepository repo)
         {
             _repo = repo;
+        }
+
+        internal Ingredient CreateIngredient(Ingredient ingredientData)
+        {
+            return _repo.CreateIngredient(ingredientData);
         }
     }
 }
