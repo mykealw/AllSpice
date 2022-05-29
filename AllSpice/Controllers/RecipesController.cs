@@ -72,24 +72,6 @@ namespace AllSpice.Controllers
             }
         }
 
-        // [HttpPost("{favorites}")]
-        // [Authorize]
-        // public async Task<ActionResult<Favorite>> Create([FromBody] Favorite favoriteData)
-        // {
-        //     try
-        //     {
-        //         Account userinfo = await HttpContext.GetUserInfoAsync<Account>();
-        //         favoriteData.AccountId = userinfo.Id;
-        //         Favorite favorite = _fs.Create(favoriteData);
-        //         favorite.Creator = userinfo;
-        //         return Ok(favorite);
-        //     }
-        //     catch (System.Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
-
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Recipe>> Edit(int id, [FromBody] Recipe recipeData)

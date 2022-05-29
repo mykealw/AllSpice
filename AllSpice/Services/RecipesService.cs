@@ -13,6 +13,7 @@ namespace AllSpice.Services
             _repo = repo;
         }
 
+        //GET SELF => RELATIONSHIPS
         internal List<Recipe> GetRecipe()
         {
             return _repo.GetRecipe();
@@ -28,16 +29,19 @@ namespace AllSpice.Services
             return recipe;
         }
 
-            internal List<Ingredient> GetIngredientsByRecipe(int id)
+        //RELATIONSHIPS
+        internal List<Ingredient> GetIngredientsByRecipe(int id)
         {
             return _repo.GetIngredientsByRecipe(id);
         }
 
+        //POSTS
         internal Recipe Create(Recipe recipeData)
         {
             return _repo.Create(recipeData);
         }
 
+        //PUTS
         internal Recipe Edit(Recipe recipeData)
         {
             Recipe original = GetById(recipeData.Id);
@@ -54,6 +58,8 @@ namespace AllSpice.Services
             return GetById(original.Id);
         }
 
+
+        //DELETES
         internal void Delete(int id, string userId)
         {
             Recipe recipe = GetById(id);

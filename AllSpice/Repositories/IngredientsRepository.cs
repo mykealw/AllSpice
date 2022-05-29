@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using AllSpice.Models;
 using Dapper;
@@ -14,6 +13,12 @@ namespace AllSpice.Repositories
             _db = db;
         }
 
+        internal Ingredient GetById(int id)
+        {
+            string sql = "SELECT * FROM ingredients WHERE id = @id;";
+            return _db.QueryFirstOrDefault<Ingredient>(sql, new { id });
+        }
+
         internal Ingredient CreateIngredient(Ingredient ingredientData)
         {
             string sql = @"
@@ -26,14 +31,22 @@ namespace AllSpice.Repositories
             return ingredientData;
         }
 
-        // internal Ingredient Get(int id)
-        // {
-        //     string sql = @"
-        //     SELECT
-        //     a.*,
-        //     i.*
-        //     FROM ingredients i
-        //     JOIN accounts a"
-        // }
+        internal void Edit(Ingredient ingredientData)
+        {
+            string sql = @"
+            UPDATE ingredients 
+            SET
+            name = @Name,
+            quantity = @Quantity,
+            WHERE id = @id;";
+            _db.Execute(sql, ingredientData);
+            // return ingredientData;
+        }
+
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM ingredients WHERE id = @id LIMIT 1;";
+            _db.Execute(sql, new { id });
+        }
     }
 }
