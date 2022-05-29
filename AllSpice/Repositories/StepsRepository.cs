@@ -21,9 +21,9 @@ namespace AllSpice.Repositories
         {
             string sql = @"
                 INSERT INTO steps
-                (name, quantity, recipeId)
+                (position, body, recipeId)
                 VALUE 
-                (@Name, @Quantity, @RecipeId);
+                (@Position, @Body, @RecipeId);
                 SELECT LAST_INSERT_ID();";
             stepData.Id = _db.ExecuteScalar<int>(sql, stepData);
             return stepData;
