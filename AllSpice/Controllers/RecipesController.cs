@@ -67,6 +67,20 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}/steps")]
+        public ActionResult<List<Step>> GetStepsByRecipe(int id)
+        {
+            try
+            {
+                List<Step> step = _rs.GetStepsByRecipe(id);
+                return Ok(step);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         //POSTS
         [HttpPost]
         [Authorize]

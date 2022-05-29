@@ -35,7 +35,13 @@ namespace AllSpice.Services
             return _repo.GetIngredientsByRecipe(id);
         }
 
+        internal List<Step> GetStepsByRecipe(int id)
+        {
+            return _repo.GetStepsByRecipe(id);
+        }
+
         //POSTS
+
         internal Recipe Create(Recipe recipeData)
         {
             return _repo.Create(recipeData);
@@ -69,5 +75,7 @@ namespace AllSpice.Services
             }
             _repo.Delete(id);
         }
+
+
     }
 }
