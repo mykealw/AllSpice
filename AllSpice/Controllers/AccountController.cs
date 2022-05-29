@@ -14,10 +14,12 @@ namespace AllSpice.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountService _accountService;
+        private readonly FavoritesService _fs;
 
-        public AccountController(AccountService accountService)
+        public AccountController(AccountService accountService, FavoritesService fs)
         {
             _accountService = accountService;
+            _fs = fs;
         }
 
         [HttpGet]
@@ -33,6 +35,21 @@ namespace AllSpice.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+        [HttpGet("Favorites")]
+        [Authorize]
+        public async Task<ActionResult<List<FavoriteRecipeViewModel>>>GetFavoritesByAccount()
+        {
+           try
+           {
+               Account userinfo = await HttpContext.GetUserInfoAsync<Account>();
+               List<FavoriteRecipeViewModel> recipes = _fs.GetFavoritesByAccount(userinfo.Id);
+               return Ok(recipes);
+           }
+           catch(Exception e)
+           {
+               return BadRequest(e.Message);
+           }
         }
     }
 

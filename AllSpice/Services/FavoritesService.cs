@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AllSpice.Models;
 using AllSpice.Repositories;
 
@@ -35,6 +36,11 @@ namespace AllSpice.Services
                 throw new Exception("invalid favorite?!?");
             }
             return favorite;
+        }
+
+        internal List<FavoriteRecipeViewModel> GetFavoritesByAccount(string id)
+        {
+            return _repo.GetFavoritesByAccount(id);
         }
     }
 }
