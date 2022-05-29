@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -52,15 +51,15 @@ namespace AllSpice.Repositories
             r.*
             FROM favorites f
             JOIN recipes r ON f.recipeId = r.id
-            JOIN accounts act ON r.creatorId = a.id
+            JOIN accounts act ON r.creatorId = act.id
             WHERE f.accountId = @id;
             ";
-            List<FavoriteRecipeViewModel> recipes = _db.Query<Account, Favorite, FavoriteRecipeViewModel, FavoriteRecipeViewModel>(sql, (act, f, r)=>
+            List<FavoriteRecipeViewModel> recipes = _db.Query<Account, Favorite, FavoriteRecipeViewModel, FavoriteRecipeViewModel>(sql, (act, f, r) =>
             {
                 r.Creator = act;
                 r.FavoriteId = f.Id;
                 return r;
-            }, new{id}).ToList<FavoriteRecipeViewModel>();
+            }, new { id }).ToList<FavoriteRecipeViewModel>();
             return recipes;
         }
     }

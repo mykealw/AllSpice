@@ -1,5 +1,5 @@
-<template>
-  <main class="m-2">
+<template class="">
+  <main class="m-2 bg ">
     <router-view />
   </main>
   <footer></footer>
@@ -19,12 +19,19 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+@import url("https://fonts.googleapis.com/css2?family=Sahitya&display=swap");
+.textfont {
+  font-family: "Sahitya", serif;
+}
 .jcc {
   justify-content: center;
 }
 .ts {
-  text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
+  text-shadow: 2px 2px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
     -1px 1px 0 #141414, 1px 1px 0 #141414;
+}
+.bg{
+  background-color: beige
 }
 // mobile
 @media only screen and (max-width: 767px) {
@@ -40,11 +47,11 @@ export default {
 // regular size screen
 @media only screen and (min-width: 767.98px) {
   .as2 {
-    margin-top: -22vh;
+    margin-top: -26vh;
     margin-left: 540px;
   }
   .os2 {
-    margin-top: -15vh;
+    margin-top: -19vh;
     margin-left: 515px;
   }
 }

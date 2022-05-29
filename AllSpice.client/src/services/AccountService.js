@@ -11,7 +11,7 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
-  async getMyFavs(){
+  async getMyFavs() {
     const res = await api.get('/account/Favorites')
     logger.log(res.data, "favorites")
     AppState.favorites = res.data
