@@ -30,6 +30,7 @@ namespace AllSpice.Services
         }
 
         //RELATIONSHIPS
+
         internal List<Ingredient> GetIngredientsByRecipe(int id)
         {
             return _repo.GetIngredientsByRecipe(id);
@@ -48,6 +49,7 @@ namespace AllSpice.Services
         }
 
         //PUTS
+
         internal Recipe Edit(Recipe recipeData)
         {
             Recipe original = GetById(recipeData.Id);
@@ -66,6 +68,7 @@ namespace AllSpice.Services
 
 
         //DELETES
+        
         internal void Delete(int id, string userId)
         {
             Recipe recipe = GetById(id);

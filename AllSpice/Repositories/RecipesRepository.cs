@@ -15,7 +15,6 @@ namespace AllSpice.Repositories
             _db = db;
         }
 
-
         // GETS SELF => RELATIONSHIPS
         internal List<Recipe> GetRecipe()
         {
@@ -81,7 +80,6 @@ namespace AllSpice.Repositories
             return recipeData;
         }
 
-
         //PUTS
         internal void Edit(Recipe original)
         {
@@ -95,7 +93,6 @@ namespace AllSpice.Repositories
                 WHERE id = @Id;";
             _db.Execute(sql, original);
         }
-
 
         //DELETES
         internal void Delete(int id)

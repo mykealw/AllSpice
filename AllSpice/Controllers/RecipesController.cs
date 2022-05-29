@@ -25,7 +25,9 @@ namespace AllSpice.Controllers
             _ingrs = ingrs;
             _ss = ss;
         }
+
         //GETS SELF => RELATIONSHIPS
+
         [HttpGet]
         public ActionResult<List<Recipe>> GetRecipe()
         {
@@ -53,7 +55,9 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         // RELATIONSHIPS 
+
         [HttpGet("{id}/ingredients")]
         public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int id)
         {
@@ -81,7 +85,9 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         //POSTS
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Recipe>> Create([FromBody] Recipe recipeData)
@@ -99,7 +105,9 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         //PUTS
+
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Recipe>> Edit(int id, [FromBody] Recipe recipeData)
@@ -117,7 +125,9 @@ namespace AllSpice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         //DELETES
+
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<ActionResult<String>> Delete(int id)
