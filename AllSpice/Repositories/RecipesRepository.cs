@@ -61,13 +61,13 @@ namespace AllSpice.Repositories
         internal void Edit(Recipe original)
         {
             string sql = @"
-UPDATE recipes
-SET
-picture = @Picture,
-title = @Title,
-Subtitle = @Subtitle,
-category = @Category
-WHERE id = @Id;";
+                UPDATE recipes
+                SET
+                picture = @Picture,
+                title = @Title,
+                Subtitle = @Subtitle,
+                category = @Category
+                WHERE id = @Id;";
             _db.Execute(sql, original);
         }
 

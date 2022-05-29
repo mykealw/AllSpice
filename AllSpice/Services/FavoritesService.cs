@@ -20,6 +20,11 @@ namespace AllSpice.Services
         internal void Delete(int id, string userId)
         {
             Favorite favorite = GetById(id);
+            if (favorite.AccountId != userId)
+            {
+                throw new Exception("This isn't your favorite to delete.");
+            }
+            _repo.Delete(id);
         }
 
         internal Favorite GetById(int id)

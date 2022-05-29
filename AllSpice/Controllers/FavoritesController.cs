@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using AllSpice.Models;
 using CodeWorks.Auth0Provider;
+using System;
 
 namespace AllSpice.Controllers
 {
@@ -34,6 +35,21 @@ namespace AllSpice.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+           [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<String>>DeleteFavorite(int id)
+        {
+           try
+           {
+               Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+               _fs.Delete(id, userInfo.Id);
+               return Ok("That does taste like poopoo.");
+           }
+           catch(Exception e)
+           {
+               return BadRequest(e.Message);
+           }
         }
     }
 }

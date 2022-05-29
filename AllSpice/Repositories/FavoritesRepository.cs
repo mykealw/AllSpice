@@ -27,11 +27,17 @@ namespace AllSpice.Repositories
         internal Favorite GetById(int id)
         {
             string sql = @"
-SELECT 
-*
-FROM favorites
-WHERE id = @id;";
+                SELECT 
+                *
+                FROM favorites
+                WHERE id = @id;";
             return _db.QueryFirstOrDefault<Favorite>(sql, new { id });
+        }
+
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM favorites WHERE id = @id LIMIT 1;";
+            _db.Execute(sql, new { id });
         }
     }
 }

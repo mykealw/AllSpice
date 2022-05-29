@@ -72,23 +72,23 @@ namespace AllSpice.Controllers
             }
         }
 
-        [HttpPost("{favorites}")]
-        [Authorize]
-        public async Task<ActionResult<Favorite>> Create([FromBody] Favorite favoriteData)
-        {
-            try
-            {
-                Account userinfo = await HttpContext.GetUserInfoAsync<Account>();
-                favoriteData.AccountId = userinfo.Id;
-                Favorite favorite = _fs.Create(favoriteData);
-                favorite.Creator = userinfo;
-                return Ok(favorite);
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        // [HttpPost("{favorites}")]
+        // [Authorize]
+        // public async Task<ActionResult<Favorite>> Create([FromBody] Favorite favoriteData)
+        // {
+        //     try
+        //     {
+        //         Account userinfo = await HttpContext.GetUserInfoAsync<Account>();
+        //         favoriteData.AccountId = userinfo.Id;
+        //         Favorite favorite = _fs.Create(favoriteData);
+        //         favorite.Creator = userinfo;
+        //         return Ok(favorite);
+        //     }
+        //     catch (System.Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        // }
 
         [HttpPut("{id}")]
         [Authorize]
@@ -124,20 +124,6 @@ namespace AllSpice.Controllers
             }
         }
 
-        [HttpDelete("favorites/{id}")]
-        [Authorize]
-        public async Task<ActionResult<String>>DeleteFavorite(int id)
-        {
-           try
-           {
-               Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-               _fs.Delete(id, userInfo.Id);
-               return Ok("That does taste like poopoo.");
-           }
-           catch(Exception e)
-           {
-               return BadRequest(e.Message);
-           }
-        }
+
     }
 }
