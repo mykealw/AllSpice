@@ -23,6 +23,13 @@ class RecipesService {
         logger.log(AppState.recipes, "my recipes")
     }
 
+    async getMyFavs(){
+        await this.getAll()
+        await accountService.getMyFavs()
+        newArr = []
+       AppState.myFavorites.forEach(f => f.creator)
+    }
+
     async getActiveRecipe(recipeId) {
         const res = await api.get('api/recipes/' + recipeId)
         logger.log(res.data, "active recipe")

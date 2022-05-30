@@ -25,7 +25,10 @@
             >
               My Recipes
             </h3>
-            <h3 class="mx-3 selectable my-auto text-dark textfont">
+            <h3
+              class="mx-3 selectable my-auto text-dark textfont"
+              @click="getMyFavs()"
+            >
               Favorites
             </h3>
           </div>
@@ -36,6 +39,25 @@
       <div class="col-md-3" :title="r.title" v-for="r in recipes" :key="r.id">
         <Recipe :recipe="r" @click="setActive(r.id)" />
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-end p-3">
+        <button
+          class="btn btn-success rounded-pill"
+          data-bs-toggle="modal"
+          data-bs-target="#create-recipe"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <div>
+      <Modal id="create-recipe">
+        <template #title>
+          <span class="text-dark textfont">Create Recipe</span>
+        </template>
+        <template #body><RecipeForm /></template>
+      </Modal>
     </div>
   </div>
 </template>
@@ -86,6 +108,16 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
+      async getMyFavs() {
+        try {
+          await recipesService.getMyFavs()
+
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      }
     }
   }
 }
