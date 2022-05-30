@@ -7,6 +7,7 @@
         v-model="editable.title"
         class="form-control"
         aria-describedby="title here"
+        required
         placeholder="Recipes Title here..."
       />
     </div>
@@ -18,6 +19,7 @@
         class="form-control"
         aria-describedby="category here"
         placeholder="Recipes Category here..."
+        required
       />
     </div>
     <div class="col-md-12">
@@ -28,6 +30,7 @@
         class="form-control"
         aria-describedby="subtitle here"
         placeholder="Recipes Subtitle here..."
+        required
       />
     </div>
     <div class="col-md-12">
@@ -38,6 +41,7 @@
         class="form-control"
         aria-describedby="image link"
         placeholder="Put Image link here..."
+        required
       />
     </div>
     <button class="btn greenb rounded text-dark mt-3" type="submit">
@@ -74,5 +78,4 @@ export default {
 
 
 <style lang="scss" scoped>
-
 </style>

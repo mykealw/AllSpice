@@ -13,6 +13,7 @@
         class="mdi mdi-heart-outline mdi-36px position-absolute rc1 rc2"
       ></i>
     </div>
+    
   </div>
 </template>
 
@@ -36,7 +37,6 @@ export default {
       stonks: computed(() => AppState.myFavorites.find(s => s.id == props.recipe.id)),
       async deleteFavorite(id) {
         try {
-          //  logger.log(id, "Id")
           await recipesService.deleteFavorite(id)
         }
         catch (error) {

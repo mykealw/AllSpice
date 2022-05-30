@@ -13,21 +13,27 @@ class RecipesService {
     }
 
     async getMyRecipes() {
-
         await this.getAll()
-        // debugger
-        logger.log(AppState.account.id, "user")
         AppState.myRecipes = AppState.recipes.filter(r => r.creatorId == AppState.account.id)
         AppState.recipes = AppState.myRecipes
 
         logger.log(AppState.recipes, "my recipes")
     }
 
-    async getMyFavs(){
+    async getMyFavs() {
         await this.getAll()
         await accountService.getMyFavs()
-        newArr = []
-       AppState.myFavorites.forEach(f => f.creator)
+        let newArr = []
+        for (let i = 0; i < AppState.myFavorites.length; i++) {
+            const fav = AppState.myFavorites[i];
+            for (let j = 0; j < AppState.recipes.length; j++) {
+                const recipe = AppState.recipes[j];
+                if (fav.id == recipe.id) {
+                    newArr.unshift(recipe)
+                }
+            }
+        }
+        AppState.recipes = newArr
     }
 
     async getActiveRecipe(recipeId) {
@@ -37,9 +43,7 @@ class RecipesService {
     }
 
     async createRecipe(body) {
-
-        const res = await api.post('api/recipes' + body)
-        logger.log(res.data, "recipe made")
+        const res = await api.post('api/recipes', body)
         AppState.recipes = AppState.recipes.unshift(res.data)
         AppState.myRecipes = AppState.myRecipes.unshift(res.data)
         accountService.getMyFavs()
@@ -53,13 +57,7 @@ class RecipesService {
     }
 
     async createFavorite(favorite) {
-        logger.log(favorite, "coming in")
-        // let recipeData = {}
-        // recipeData.recipeId = id
-        // recipeData.accountId = AppState.user.id
-        // logger.log(recipeData, "going through")
         const res = await api.post('api/favorites', favorite)
-        // logger.log(res.data, "favorited")
         AppState.favorites = AppState.favorites.unshift(res.data)
         AppState.myFavorites = AppState.myFavorites.unshift(res.data)
     }
@@ -67,11 +65,7 @@ class RecipesService {
     async deleteFavorite(recipeId) {
         let gone = null
         gone = AppState.myFavorites.find(mf => mf.id == recipeId)
-        // logger.log(gone, "gone?")
-        // deleteId = AppState.myFavorites.filter(mf => AppState.myFavorites.favoriteId == mf.id)
-        // logger.log(deleteId, "delete id?")
         const res = await api.delete('api/favorites/' + gone.favoriteId)
-        // logger.log(res.data, "deleted fav")
         AppState.favorites = AppState.favorites.filter(f => f.id != gone.id)
         AppState.myFavorites = AppState.myFavorites.filter(f => f.id != gone.id)
     }
