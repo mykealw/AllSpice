@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
+import { accountService } from "./AccountService.js"
 import { api } from "./AxiosService.js"
 
 
@@ -28,6 +29,7 @@ class RecipesService {
         logger.log(res.data, "recipe made")
         AppState.recipes = AppState.recipes.unshift(res.data)
         AppState.myRecipes = AppState.myRecipes.unshift(res.data)
+        accountService.getMyFavs()
     }
 
     async deleteRecipe(id) {
@@ -37,27 +39,28 @@ class RecipesService {
         AppState.myRecipes = AppState.myRecipes.filter(r => r.id != id)
     }
 
-    async createFavorite(id) {
-
-        let recipeData = {}
-        recipeData.recipeId = id
-        recipeData.accountId = AppState.user.id
-        logger.log(recipeData, "going through")
-        const res = await api.post('api/favorites', recipeData)
-        logger.log(res.data, "favorited")
+    async createFavorite(favorite) {
+        logger.log(favorite, "coming in")
+        // let recipeData = {}
+        // recipeData.recipeId = id
+        // recipeData.accountId = AppState.user.id
+        // logger.log(recipeData, "going through")
+        const res = await api.post('api/favorites', favorite)
+        // logger.log(res.data, "favorited")
         AppState.favorites = AppState.favorites.unshift(res.data)
         AppState.myFavorites = AppState.myFavorites.unshift(res.data)
     }
 
-    async deleteFavorite(id) {
-        // debugger
-        let deleteId = {}
-        deleteId = AppState.myFavorites.filter(mf => mf.id == AppState.myFavorites.favoriteId)
-        logger.log(deleteId, "delete id?")
-        const res = await api.delete('api/favorites/' + id)
-        logger.log(res.data, "deleted fav")
-        AppState.favorites = AppState.favorites.filter(f => f.id != id)
-        AppState.myFavorites = AppState.myFavorites.filter(f => f.id != id)
+    async deleteFavorite(recipeId) {
+        let gone = null
+        gone = AppState.myFavorites.find(mf => mf.id == recipeId)
+        // logger.log(gone, "gone?")
+        // deleteId = AppState.myFavorites.filter(mf => AppState.myFavorites.favoriteId == mf.id)
+        // logger.log(deleteId, "delete id?")
+        const res = await api.delete('api/favorites/' + gone.favoriteId)
+        // logger.log(res.data, "deleted fav")
+        AppState.favorites = AppState.favorites.filter(f => f.id != gone.id)
+        AppState.myFavorites = AppState.myFavorites.filter(f => f.id != gone.id)
     }
 }
 

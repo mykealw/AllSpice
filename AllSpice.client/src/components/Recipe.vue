@@ -33,7 +33,7 @@ export default {
   setup(props) {
     return {
       props,
-      stonks: computed(() => AppState.myFavorites.find(s => s.id === props.recipe.id)),
+      stonks: computed(() => AppState.myFavorites.find(s => s.id == props.recipe.id)),
       async deleteFavorite(id) {
         try {
           //  logger.log(id, "Id")
@@ -46,7 +46,11 @@ export default {
       },
       async createFavorite(id) {
         try {
-          await recipesService.createFavorite(id)
+          let favorite = {
+            accountId: AppState.user.id,
+            recipeId: id
+          }
+          await recipesService.createFavorite(favorite)
         }
         catch (error) {
           logger.log(error);
