@@ -3,11 +3,18 @@
     <div class="row">
       <div class="col-md-12 text-light position-relative">
         <img class="spicy mt-2" src="src\assets\img\allSpice.jpg" alt="" />
-        <h1 class="ts position-absolute as1 as2 textfont">ALL-SPICE</h1>
-        <h3 class="ts position-absolute os1 os2 textfont">
+        <h1 class="ts position-absolute as1 text-light as2 textfont">ALL-SPICE</h1>
+        <h3 class="ts position-absolute os1 text-light os2 textfont">
           Cherish Your Family <br />
           And Their Cooking
         </h3>
+        <div class="position-absolute nb2 nb1">
+          <div class="d-flex bd bg">
+            <h3 class="mx-3 selectable my-auto text-dark textfont">Home</h3>
+            <h3 class="mx-3 selectable my-auto text-dark textfont">My Recipes</h3>
+            <h3 class="mx-3 selectable my-auto text-dark textfont">Favorites</h3>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row mt-5">

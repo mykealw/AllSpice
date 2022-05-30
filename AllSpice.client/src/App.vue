@@ -33,6 +33,12 @@ export default {
 .bg {
   background-color: beige;
 }
+.zz {
+  z-index: 1111;
+}
+.bd {
+  border: 5px solid black;
+}
 // mobile
 @media only screen and (max-width: 767px) {
   .as1 {
@@ -46,6 +52,10 @@ export default {
   .os1 {
     margin-top: -14vh;
     margin-left: 100px;
+  }
+  .nb1 {
+    margin-top: -2vh;
+    margin-left: -2px;
   }
 }
 // regular size screen
@@ -61,6 +71,10 @@ export default {
   .os2 {
     margin-top: -19vh;
     margin-left: 515px;
+  }
+  .nb2 {
+    margin-top: -4vh;
+    margin-left: 415px;
   }
 }
 </style>
