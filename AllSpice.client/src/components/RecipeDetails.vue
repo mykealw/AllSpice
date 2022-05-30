@@ -10,7 +10,14 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="text-dark textfont">{{ activeRecipe.title }}</h5>
+          <h5 class="text-dark textfont">
+            {{ activeRecipe.title }}
+            <i
+              v-if="activeRecipe.creatorId == account.id"
+              class="mdi mdi-delete selectable"
+              @click.stop="deleteReciepe()"
+            ></i>
+          </h5>
           <p class="text-dark textfont">{{ activeRecipe.subtitle }}</p>
         </div>
         <div class="col-md-6 text-dark">
