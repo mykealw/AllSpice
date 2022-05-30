@@ -1,18 +1,33 @@
 <template>
+  <!-- <Navbar /> -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 text-light position-relative">
         <img class="spicy mt-2" src="src\assets\img\allSpice.jpg" alt="" />
-        <h1 class="ts position-absolute as1 text-light as2 textfont">ALL-SPICE</h1>
+        <h1 class="ts position-absolute as1 text-light as2 textfont">
+          ALL-SPICE
+        </h1>
         <h3 class="ts position-absolute os1 text-light os2 textfont">
           Cherish Your Family <br />
           And Their Cooking
         </h3>
         <div class="position-absolute nb2 nb1">
           <div class="d-flex bd bg">
-            <h3 class="mx-3 selectable my-auto text-dark textfont">Home</h3>
-            <h3 class="mx-3 selectable my-auto text-dark textfont">My Recipes</h3>
-            <h3 class="mx-3 selectable my-auto text-dark textfont">Favorites</h3>
+            <h3
+              class="mx-3 selectable my-auto text-dark textfont"
+              @click="getAll()"
+            >
+              Home
+            </h3>
+            <h3
+              class="mx-3 selectable my-auto text-dark textfont"
+              @click="getMyRecipes()"
+            >
+              My Recipes
+            </h3>
+            <h3 class="mx-3 selectable my-auto text-dark textfont">
+              Favorites
+            </h3>
           </div>
         </div>
       </div>
@@ -51,7 +66,26 @@ export default {
       setActive(id) {
         AppState.activeRecipe = AppState.recipes.filter(r => r.id == id)
         logger.log(AppState.activeRecipe, "active recipe")
-      }
+      },
+      async getMyRecipes() {
+        try {
+          await recipesService.getMyRecipes()
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async getAll() {
+        try {
+          await recipesService.getAll()
+
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
     }
   }
 }

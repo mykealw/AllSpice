@@ -12,9 +12,15 @@ class RecipesService {
         AppState.recipes = res.data
     }
 
-    async getMyRecipes(accountId) {
-        AppState.myRecipes = await AppState.recipes.filter(r => r.creatorId == AppState.user.accountId)
-        logger.log(AppState.myRecipes, "my recipes")
+    async getMyRecipes() {
+
+        await this.getAll()
+        // debugger
+        logger.log(AppState.account.id, "user")
+        AppState.myRecipes = AppState.recipes.filter(r => r.creatorId == AppState.account.id)
+        AppState.recipes = AppState.myRecipes
+
+        logger.log(AppState.recipes, "my recipes")
     }
 
     async getActiveRecipe(recipeId) {
