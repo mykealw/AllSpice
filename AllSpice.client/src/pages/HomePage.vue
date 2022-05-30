@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-md-3 " :title="r.title" v-for="r in recipes" :key= "r.id">
-        <Recipe :recipe="r"/>
+      <div class="col-md-3" :title="r.title" v-for="r in recipes" :key="r.id">
+        <Recipe :recipe="r" @click="setActive(r.id)" />
       </div>
     </div>
   </div>
@@ -40,7 +40,11 @@ export default {
       }
     })
     return {
-      recipes: computed(() => AppState.recipes)
+      recipes: computed(() => AppState.recipes),
+      setActive(id) {
+        AppState.activeRecipe = AppState.recipes.filter(r => r.id == id)
+        logger.log(AppState.activeRecipe, "active recipe")
+      }
     }
   }
 }

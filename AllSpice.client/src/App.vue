@@ -1,5 +1,5 @@
 <template class="">
-  <main class="m-2 bg ">
+  <main class="m-2 bg">
     <router-view />
   </main>
   <footer></footer>
@@ -30,14 +30,18 @@ export default {
   text-shadow: 2px 2px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
     -1px 1px 0 #141414, 1px 1px 0 #141414;
 }
-.bg{
-  background-color: beige
+.bg {
+  background-color: beige;
 }
 // mobile
 @media only screen and (max-width: 767px) {
   .as1 {
     margin-top: -18vh;
     margin-left: 127px;
+  }
+  .rc1 {
+    margin-top: -26vh;
+    margin-left: 310px;
   }
   .os1 {
     margin-top: -14vh;
@@ -49,6 +53,10 @@ export default {
   .as2 {
     margin-top: -26vh;
     margin-left: 540px;
+  }
+  .rc2 {
+    margin-top: -26vh;
+    margin-left: 245px;
   }
   .os2 {
     margin-top: -19vh;

@@ -12,7 +12,7 @@ class RecipesService {
     }
 
     async getMyRecipes(accountId) {
-        AppState.myRecipes = await AppState.recipes.filter(r => r.creatorId == accountId)
+        AppState.myRecipes = await AppState.recipes.filter(r => r.creatorId == AppState.user.accountId)
         logger.log(AppState.myRecipes, "my recipes")
     }
 
@@ -22,11 +22,12 @@ class RecipesService {
         AppState.activeRecipe = res.data
     }
 
-    async createRecipe(recipeData) {
+    async createRecipe(body) {
+
         const res = await api.post('api/recipes' + recipeData)
         logger.log(res.data, "recipe made")
-        AppState.recipes.unshift(res.data)
-        AppState.myRecipes.unshift(res.data)
+        AppState.recipes = AppState.recipes.unshift(res.data)
+        AppState.myRecipes = AppState.myRecipes.unshift(res.data)
     }
 
     async deleteRecipe(id) {
@@ -36,15 +37,24 @@ class RecipesService {
         AppState.myRecipes = AppState.myRecipes.filter(r => r.id != id)
     }
 
-    async createFavorite(body) {
-        const res = await api.post('api/favorites', body)
-        loggger.log(res.data, "favorited")
-        AppState.favorites.unshift(res.data)
-        AppState.myFavorites.unshift(res.data)
+    async createFavorite(id) {
+
+        let recipeData = {}
+        recipeData.recipeId = id
+        recipeData.accountId = AppState.user.id
+        logger.log(recipeData, "going through")
+        const res = await api.post('api/favorites', recipeData)
+        logger.log(res.data, "favorited")
+        AppState.favorites = AppState.favorites.unshift(res.data)
+        AppState.myFavorites = AppState.myFavorites.unshift(res.data)
     }
 
     async deleteFavorite(id) {
-        const res = await api.delete('api/favorites' + id)
+        // debugger
+        let deleteId = {}
+        deleteId = AppState.myFavorites.filter(mf => mf.id == AppState.myFavorites.favoriteId)
+        logger.log(deleteId, "delete id?")
+        const res = await api.delete('api/favorites/' + id)
         logger.log(res.data, "deleted fav")
         AppState.favorites = AppState.favorites.filter(f => f.id != id)
         AppState.myFavorites = AppState.myFavorites.filter(f => f.id != id)

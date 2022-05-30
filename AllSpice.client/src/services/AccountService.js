@@ -15,7 +15,8 @@ class AccountService {
     const res = await api.get('/account/Favorites')
     logger.log(res.data, "favorites")
     AppState.favorites = res.data
-    AppState.myFavorites = AppState.favorites.filter(f => f.accountId == accountId)
+
+    AppState.myFavorites = AppState.favorites.filter(f => f.accountId == AppState.user.accountId)
     logger.log(AppState.myFavorites, "my favs")
   }
 }
