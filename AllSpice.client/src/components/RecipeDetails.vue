@@ -10,70 +10,82 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
-          <h5>{{ activeRecipe.title }}</h5>
-          <p>{{ activeRecipe.subtitle }}</p>
+          <h5 class="text-dark textfont">{{ activeRecipe.title }}</h5>
+          <p class="text-dark textfont">{{ activeRecipe.subtitle }}</p>
         </div>
         <div class="col-md-6 text-dark">
           <div class="bgcolor text-light rounded-top">
-            <h6 class="text-center m-0">Recipe Steps</h6>
+            <h6 class="text-center m-0 text-dark textfont">Recipe Steps</h6>
           </div>
-          <div class="bggrey">
+          <div>
             <h6
               v-for="s in steps"
               :key="s.id"
               class="selectable"
-              @click="removeStep(s.id)"
+              @click.stop="removeStep(s.id)"
             >
               {{ s.position }} {{ s.body }}
             </h6>
           </div>
-          <div>
+          <div v-if="activeRecipe.creatorId == account.id">
             <form @submit.prevent="addStep(activeRecipe.id)">
-              <label for="" class="form-label"></label>
+              <label for="step body" class="form-label"></label>
               <input
                 type="text"
+                required
                 v-model="editable.body"
                 class="form-control"
-                aria-describedby="helpId"
+                aria-describedby="add step body"
                 placeholder="Add step..."
               />
-              <button type="submit" class="btn greenbtn">+</button>
+              <label for="step position"></label>
+              <input
+                type="number"
+                required
+                placeholder="step position #"
+                v-model="editable.position"
+                class="form-control"
+                aria-describedby="add step positn"
+              />
+              <button type="submit" class="btn greenb my-1">+</button>
             </form>
           </div>
         </div>
         <div class="col-md-6 text-dark">
           <div class="bgcolor text-light rounded-top">
-            <h6 class="text-center m-0">Ingredients</h6>
+            <h6 class="text-center m-0 text-dark textfont">Ingredients</h6>
           </div>
-          <div class="bggrey">
+          <div>
             <h6
               v-for="i in ingredients"
               :key="i.id"
               class="selectable"
-              @click="removeIngredient(i.id)"
+              @click.stop="removeIngredient(i.id)"
             >
               {{ i.name }} {{ i.quantity }}
             </h6>
           </div>
-          <div>
+          <div v-if="activeRecipe.creatorId == account.id">
             <form @submit.prevent="addIngredients(activeRecipe.id)">
-              <label for="" class="form-label"></label>
+              <label for=" ingredient add name" class="form-label"></label>
               <input
                 type="text"
                 v-model="editable.name"
+                required
                 class="form-control"
-                aria-describedby="helpId"
+                aria-describedby="ingredient name add"
                 placeholder="Name of Ingredient..."
               />
-              <label for="" class="form-label"></label>
+              <label for=" ingredient quantity" class="form-label"></label>
               <input
                 type="text"
+                required
                 v-model="editable.quantity"
                 class="form-control"
-                aria-describedby="helpId"
+                aria-describedby="add quantity input"
                 placeholder="Add Quantity..."
               />
-              <button type="submit" class="btn greenb">+</button>
+              <button type="submit" class="btn greenb my-1">+</button>
             </form>
           </div>
         </div>
@@ -86,14 +98,78 @@
 <script>
 import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
-import { onMounted, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
+import { stepsService } from '../services/StepsService.js'
+import { recipesService } from '../services/RecipesService.js'
 
 export default {
-
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
   setup(props) {
-    return {}
+    const editable = ref({ recipeId: props.id })
+    return {
+      editable,
+      async addStep() {
+        try {
+          await stepsService.addSteps(editable.value)
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async addIngredients() {
+        try {
+          await stepsService.addIngredients(editable.value)
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async removeStep(id) {
+        try {
+          if (Pop.confirm()) {
+            await stepsService.removeSteps(id)
+          }
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async removeIngredient(id) {
+        try {
+          if (Pop.confirm()) {
+            await stepsService.removeIngredients(id)
+          }
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async deleteReciepe(id) {
+        try {
+          if (Pop.confirm()) {
+            await recipesService.deleteRecipe(id)
+          }
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      account: computed(() => AppState.account),
+      activeRecipe: computed(() => AppState.recipes.find(r => r.id == props.id)),
+      steps: computed(() => AppState.steps),
+      ingredients: computed(() => AppState.ingredients)
+    }
   }
 }
 </script>

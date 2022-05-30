@@ -9,13 +9,13 @@ class StepsService {
         const res = await api.get('api/recipes/' + id + '/steps')
         logger.log(res.data, "steps got")
         AppState.steps = res.data
-        AppState.steps.sort((a, b) => (a.position < b.position))
+        AppState.steps.sort((a, b) => (a.position > b.position))
     }
 
     async addSteps(body) {
         const res = await api.post('api/steps', body)
         logger.log(res.data, "added step")
-        AppState.steps.unshift(res.data)
+        AppState.steps.pop(res.data)
         AppState.steps.sort((a, b) => (a.position < b.position))
     }
 
@@ -38,7 +38,7 @@ class StepsService {
     }
 
     async removeIngredients(id) {
-        const res = await api.delete('api/ingredients' + id)
+        const res = await api.delete('api/ingredients/' + id)
         logger.log(res.data, "deleted ingredients")
         AppState.ingredients = AppState.ingredients.filter(i => i.id != id)
     }

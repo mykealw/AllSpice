@@ -60,6 +60,9 @@ export default {
     margin-top: -2vh;
     margin-left: -2px;
   }
+  .rd1 {
+    margin-top: -11vh;
+  }
 }
 // regular size screen
 @media only screen and (min-width: 767.98px) {
@@ -78,6 +81,9 @@ export default {
   .nb2 {
     margin-top: -4vh;
     margin-left: 415px;
+  }
+  .rd2 {
+    margin-top: -11vh;
   }
 }
 </style>

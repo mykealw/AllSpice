@@ -76,7 +76,6 @@ export default {
     watchEffect(async () => {
       try {
         await recipesService.getAll()
-        // await recipesService.getMyRecipes()
       }
       catch (error) {
         logger.log(error)
