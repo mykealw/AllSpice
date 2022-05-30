@@ -74,7 +74,5 @@ export default {
 
 
 <style lang="scss" scoped>
-.greenb {
-  background-color: green;
-}
+
 </style>

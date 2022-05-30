@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-md-12 d-flex justify-content-end p-3">
         <button
-          class="btn btn-success rounded-pill"
+          class="btn greenb rounded-pill text-bolds"
           data-bs-toggle="modal"
           data-bs-target="#create-recipe"
         >

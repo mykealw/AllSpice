@@ -39,6 +39,9 @@ export default {
 .bd {
   border: 5px solid black;
 }
+.greenb {
+  background-color: green;
+}
 // mobile
 @media only screen and (max-width: 767px) {
   .as1 {
