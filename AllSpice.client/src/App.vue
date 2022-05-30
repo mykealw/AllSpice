@@ -61,7 +61,7 @@ export default {
     margin-left: -2px;
   }
   .rd1 {
-    margin-top: -11vh;
+    margin-top: -8vh;
   }
 }
 // regular size screen
