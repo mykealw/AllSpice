@@ -15,7 +15,7 @@ class StepsService {
     async addSteps(body) {
         const res = await api.post('api/steps', body)
         logger.log(res.data, "added step")
-        AppState.steps.pop(res.data)
+        AppState.steps.unshift(res.data)
         AppState.steps.sort((a, b) => (a.position < b.position))
     }
 
