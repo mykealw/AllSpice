@@ -14,19 +14,19 @@
         <div class="position-absolute nb2 nb1">
           <div class="d-flex bd bg">
             <h3
-              class="mx-3 selectable my-auto text-dark textfont"
+              class="mx-3 action my-auto text-dark textfont"
               @click="getAll()"
             >
               Home
             </h3>
             <h3
-              class="mx-3 selectable my-auto text-dark textfont"
+              class="mx-3 action my-auto text-dark textfont"
               @click="getMyRecipes()"
             >
               My Recipes
             </h3>
             <h3
-              class="mx-3 selectable my-auto text-dark textfont"
+              class="mx-3 action my-auto text-dark textfont"
               @click="getMyFavs()"
             >
               Favorites

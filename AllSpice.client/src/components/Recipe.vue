@@ -1,19 +1,32 @@
 <template>
-  <div class="Recipe selectable my-2 position-relative">
+  <div class="Recipe my-2 position-relative">
     <img class="rp" :src="recipe.picture" alt="" />
     <div class="div">
       <i
         @click="deleteFavorite(recipe.id)"
         v-if="stonks"
-        class="mdi mdi-heart mdi-36px position-absolute rc1 rc2 text-danger"
+        class="
+          mdi mdi-heart mdi-36px
+          position-absolute
+          rc1
+          rc2
+          action
+          text-danger
+        "
       ></i>
       <i
         @click="createFavorite(recipe.id)"
         v-if="!stonks"
-        class="mdi mdi-heart-outline mdi-36px position-absolute rc1 rc2"
+        class="
+          mdi mdi-heart-outline mdi-36px
+          position-absolute
+          action
+          rc1
+          rc2
+        "
       ></i>
       <button
-        class="btn btn-dark text-light textfont rd1 rd2"
+        class="btn btn-dark text-light textfont rd1 rd2 selectable"
         data-bs-toggle="modal"
         :data-bs-target="'#see-more' + recipe.id"
         @click="getSteps(recipe.id)"
