@@ -141,7 +141,7 @@ export default {
       },
       async removeStep(id) {
         try {
-          if (Pop.confirm()) {
+          if (await Pop.confirm()) {
             await stepsService.removeSteps(id)
           }
         }
@@ -152,7 +152,7 @@ export default {
       },
       async removeIngredient(id) {
         try {
-          if (Pop.confirm()) {
+          if (await Pop.confirm()) {
             await stepsService.removeIngredients(id)
           }
         }
@@ -163,7 +163,7 @@ export default {
       },
       async deleteReciepe(id) {
         try {
-          if (Pop.confirm()) {
+          if (await Pop.confirm()) {
             await recipesService.deleteRecipe(id)
           }
         }
