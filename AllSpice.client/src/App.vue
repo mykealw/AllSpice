@@ -26,6 +26,12 @@ export default {
 .jcc {
   justify-content: center;
 }
+.bt{
+  font-weight: bold;
+}
+.bbt{
+  font-weight: bolder;
+}
 .ts {
   text-shadow: 2px 2px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
     -1px 1px 0 #141414, 1px 1px 0 #141414;
