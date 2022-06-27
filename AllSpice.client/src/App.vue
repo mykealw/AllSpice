@@ -78,7 +78,7 @@ export default {
   }
   .rc2 {
     margin-top: -26vh;
-    margin-left: 19vw;
+    margin-left: 19.5vw;
   }
   .os2 {
     margin-top: -19vh;

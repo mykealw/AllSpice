@@ -10,7 +10,7 @@
 
     <div class="dropdown my-2 my-lg-0" v-else>
       <div
-        class="dropdown-toggle action"
+        class="dropdown-toggle selectable"
         data-bs-toggle="dropdown"
         aria-expanded="false"
         id="authDropdown"
@@ -22,7 +22,7 @@
             height="40"
             class="rounded"
           />
-          <span class="mx-3 text-dark textfont">{{ account.name }}</span>
+          <span class="mx-2 text-dark textfont">{{ account.name }}</span>
         </div>
       </div>
       <div
