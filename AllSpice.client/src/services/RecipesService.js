@@ -45,7 +45,7 @@ class RecipesService {
     async createRecipe(body) {
         const res = await api.post('api/recipes', body)
         AppState.recipes = AppState.recipes.unshift(res.data)
-        AppState.myRecipes = AppState.myRecipes.unshift(res.data)
+        AppState.myRecipes = AppState.myRecipes.push(res.data)
         accountService.getMyFavs()
     }
 

@@ -15,7 +15,7 @@
             <i
               v-if="activeRecipe.creatorId == account.id"
               class="mdi mdi-delete action"
-              @click.stop="deleteReciepe()"
+              @click.stop="deleteReciepe(activeRecipe.id)"
             ></i>
           </h5>
           <p class="text-dark textfont">{{ activeRecipe.subtitle }}</p>
@@ -165,6 +165,7 @@ export default {
         try {
           if (await Pop.confirm()) {
             await recipesService.deleteRecipe(id)
+            Modal.getOrCreateInstance(document.getElementById('form-modal')).hide()
           }
         }
         catch (error) {
