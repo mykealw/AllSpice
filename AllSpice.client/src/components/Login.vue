@@ -1,7 +1,7 @@
 <template>
-  <span class="navbar-text">
+  <span class="navbar-text ">
     <button
-      class="btn selectable text-dark text-uppercase my-2 my-lg-0"
+      class="btn selectable text-dark text-uppercase my-1 my-lg-0 textfont"
       @click="login"
       v-if="!user.isAuthenticated"
     >
@@ -22,7 +22,7 @@
             height="40"
             class="rounded"
           />
-          <span class="mx-3 text-dark">{{ account.name }}</span>
+          <span class="mx-3 text-dark textfont">{{ account.name }}</span>
         </div>
       </div>
       <div

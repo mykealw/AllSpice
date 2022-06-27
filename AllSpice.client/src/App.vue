@@ -51,23 +51,23 @@ export default {
 // mobile
 @media only screen and (max-width: 767px) {
   .as1 {
-    margin-top: -18vh;
-    margin-left: 127px;
+    margin-top: -23vh;
+    margin-left: 33vw;
   }
   .rc1 {
     margin-top: -26vh;
-    margin-left: 310px;
+    margin-left: 83vw;
   }
   .os1 {
     margin-top: -14vh;
-    margin-left: 100px;
+    margin-left: 25vw;
   }
   .nb1 {
-    margin-top: -2vh;
-    margin-left: -2px;
+    margin-top: 2vh;
+    margin-left: 1vw;
   }
   .rd1 {
-    margin-top: -8vh;
+    margin-top: -14vh;
   }
 }
 // regular size screen
