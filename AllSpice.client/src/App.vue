@@ -1,5 +1,5 @@
 <template class="">
-  <main class="m-2 bg">
+  <main class=" bg">
     <router-view />
   </main>
   <footer></footer>

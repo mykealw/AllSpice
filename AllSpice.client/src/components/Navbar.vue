@@ -1,8 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark  px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
       </div>
     </router-link>
     <button
@@ -16,7 +15,7 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <!-- <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
           <router-link
@@ -26,10 +25,10 @@
             About
           </router-link>
         </li>
-      </ul>
+      </ul> -->
       <!-- LOGIN COMPONENT HERE -->
       <Login />
-    </div>
+    <!-- </div> -->
   </nav>
 </template>
 
