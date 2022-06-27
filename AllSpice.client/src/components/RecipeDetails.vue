@@ -14,7 +14,7 @@
             {{ activeRecipe.title }}
             <i
               v-if="activeRecipe.creatorId == account.id"
-              class="mdi mdi-delete selectable"
+              class="mdi mdi-delete action"
               @click.stop="deleteReciepe()"
             ></i>
           </h5>
@@ -28,7 +28,7 @@
             <h6
               v-for="s in steps"
               :key="s.id"
-              class="selectable"
+              class="action"
               @click.stop="removeStep(s.id)"
             >
               {{ s.position }} {{ s.body }}
@@ -66,7 +66,7 @@
             <h6
               v-for="i in ingredients"
               :key="i.id"
-              class="selectable"
+              class="action"
               @click.stop="removeIngredient(i.id)"
             >
               {{ i.name }} {{ i.quantity }}

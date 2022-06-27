@@ -1,7 +1,7 @@
 <template>
-  <span class="navbar-text ">
+  <span class="navbar-text">
     <button
-      class="btn selectable text-dark text-uppercase my-1 my-lg-0 textfont"
+      class="btn action text-dark text-uppercase my-1 my-lg-0 textfont"
       @click="login"
       v-if="!user.isAuthenticated"
     >
@@ -10,7 +10,7 @@
 
     <div class="dropdown my-2 my-lg-0" v-else>
       <div
-        class="dropdown-toggle selectable"
+        class="dropdown-toggle action"
         data-bs-toggle="dropdown"
         aria-expanded="false"
         id="authDropdown"

@@ -17,16 +17,10 @@
       <i
         @click="createFavorite(recipe.id)"
         v-if="!stonks"
-        class="
-          mdi mdi-heart-outline mdi-36px
-          position-absolute
-          action
-          rc1
-          rc2
-        "
+        class="mdi mdi-heart-outline mdi-36px position-absolute action rc1 rc2"
       ></i>
       <button
-        class="btn btn-dark text-light textfont rd1 rd2 selectable"
+        class="btn btn-dark text-light textfont rd1 rd2 action"
         data-bs-toggle="modal"
         :data-bs-target="'#see-more' + recipe.id"
         @click="getSteps(recipe.id)"

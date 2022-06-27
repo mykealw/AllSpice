@@ -74,19 +74,19 @@ export default {
 @media only screen and (min-width: 767.98px) {
   .as2 {
     margin-top: -26vh;
-    margin-left: 540px;
+    margin-left: 42vw;
   }
   .rc2 {
     margin-top: -26vh;
-    margin-left: 245px;
+    margin-left: 19vw;
   }
   .os2 {
     margin-top: -19vh;
-    margin-left: 515px;
+    margin-left: 40vw;
   }
   .nb2 {
     margin-top: -4vh;
-    margin-left: 415px;
+    margin-left: 33vw;
   }
   .rd2 {
     margin-top: -11vh;
