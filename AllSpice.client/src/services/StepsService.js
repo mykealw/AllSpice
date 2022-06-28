@@ -12,8 +12,10 @@ class StepsService {
         AppState.steps.sort((a, b) => (a.position > b.position))
     }
 
-    async addSteps(body) {
-        const res = await api.post('api/steps', body)
+    async addSteps(id, body) {
+        body.recipeId = id
+        logger.log(body, "body")
+        const res = await api.post('api/steps/', body)
         logger.log(res.data, "added step")
         AppState.steps.unshift(res.data)
         AppState.steps.sort((a, b) => (a.position < b.position))
@@ -31,8 +33,10 @@ class StepsService {
         AppState.ingredients = res.data
     }
 
-    async addIngredients(body) {
-        const res = await api.post('api/ingredients', body)
+    async addIngredients(id, body) {
+        body.recipeId = id
+        logger.log(body, "body")
+        const res = await api.post('api/ingredients/', body)
         logger.log(res.data, "added ingredients")
         AppState.ingredients.unshift(res.data)
     }

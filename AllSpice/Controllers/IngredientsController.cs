@@ -14,7 +14,7 @@ namespace AllSpice.Controllers
     {
         private readonly IngredientsService _ingrs;
 
-        public IngredientsController(IngredientsService ingrs, RecipesService rs)
+        public IngredientsController(IngredientsService ingrs)
         {
             _ingrs = ingrs;
         }

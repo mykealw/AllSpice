@@ -127,18 +127,22 @@ export default {
     const editable = ref({ recipeId: props.id })
     return {
       editable,
-      async addStep() {
+      account: computed(() => AppState.account),
+      activeRecipe: computed(() => AppState.activeRecipe),
+      steps: computed(() => AppState.steps),
+      ingredients: computed(() => AppState.ingredients),
+      async addStep(id) {
         try {
-          await stepsService.addSteps(editable.value)
+          await stepsService.addSteps(id, editable.value)
         }
         catch (error) {
           logger.log(error);
           Pop.toast(error.message, "error");
         }
       },
-      async addIngredients() {
+      async addIngredients(id) {
         try {
-          await stepsService.addIngredients(editable.value)
+          await stepsService.addIngredients(id, editable.value)
         }
         catch (error) {
           logger.log(error);
@@ -159,6 +163,7 @@ export default {
       async removeIngredient(id) {
         try {
           if (await Pop.confirm()) {
+            logger.log(id)
             await stepsService.removeIngredients(id)
           }
         }
@@ -178,11 +183,8 @@ export default {
           logger.log(error);
           Pop.toast(error.message, "error");
         }
-      },
-      account: computed(() => AppState.account),
-      activeRecipe: computed(() => AppState.activeRecipe),
-      steps: computed(() => AppState.steps),
-      ingredients: computed(() => AppState.ingredients)
+      }
+
     }
   }
 }

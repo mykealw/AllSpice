@@ -39,7 +39,8 @@ namespace AllSpice.Services
         internal void Delete(int id, Account userInfo)
         {
             Ingredient ingredient = _repo.GetById(id);
-            if (ingredient.Creator != userInfo)
+            Recipe recipe = _rs.GetById(ingredient.RecipeId);
+            if (recipe.CreatorId != userInfo.Id)
             {
                 throw new Exception("not yours to delete");
             }
