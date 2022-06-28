@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
-  activeRecipe: {},
+  activeRecipe: null,
   recipes: [],
   myRecipes: [],
   ingredients: [],

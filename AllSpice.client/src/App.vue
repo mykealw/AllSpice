@@ -1,8 +1,11 @@
 <template class="">
-  <main class=" bg">
+  <main class="bg">
     <router-view />
   </main>
+
   <footer></footer>
+  <RecipeForm />
+  <RecipeDetails />
 </template>
 
 <script>
@@ -26,10 +29,10 @@ export default {
 .jcc {
   justify-content: center;
 }
-.bt{
+.bt {
   font-weight: bold;
 }
-.bbt{
+.bbt {
   font-weight: bolder;
 }
 .ts {

@@ -37,28 +37,27 @@
     </div>
     <div class="row mt-5">
       <div class="col-md-3" :title="r.title" v-for="r in recipes" :key="r.id">
-        <Recipe :recipe="r" @click="setActive(r.id)" />
+        <Recipe :recipe="r"  />
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 d-flex justify-content-end p-3">
-        <button
-          class="btn greenb rounded-pill bbt"
-          data-bs-toggle="modal"
-          data-bs-target="#create-recipe"
-        >
+        <button class="btn greenb rounded-pill bbt" @click="makeRecipeModal()">
           +
         </button>
       </div>
     </div>
     <div>
-      <Modal id="create-recipe">
+      <!-- <Modal id="create-recipe">
         <template #title>
           <span class="text-dark textfont">Create Recipe</span>
         </template>
         <template #body><RecipeForm /></template>
-      </Modal>
+      </Modal> -->
     </div>
+  </div>
+  <div>
+
   </div>
 </template>
 
@@ -70,6 +69,8 @@ import { recipesService } from '../services/RecipesService.js'
 import { accountService } from '../services/AccountService.js'
 import { AppState } from '../AppState.js'
 import Pop from '../utils/Pop.js'
+import { Modal } from 'bootstrap'
+
 export default {
   name: 'Home',
   setup() {
@@ -84,9 +85,14 @@ export default {
     })
     return {
       recipes: computed(() => AppState.recipes),
-      setActive(id) {
-        AppState.activeRecipe = AppState.recipes.filter(r => r.id == id)
-        logger.log(AppState.activeRecipe, "active recipe")
+    
+      async makeRecipeModal() {
+        try {
+          Modal.getOrCreateInstance(document.getElementById('create-recipe')).show()
+        } catch (error) {
+          logger.log(error)
+          Pop.toast(error.message, "error")
+        }
       },
       async getMyRecipes() {
         try {

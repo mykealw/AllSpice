@@ -21,7 +21,7 @@
           ></button>
         </div>
         <div class="modal-body bg-light">
-          <slot name="body"><!--body slot--></slot>
+          <slot name="modal-body"><!--body slot--></slot>
         </div>
         <div class="">
           <slot name="footer"><!--footer slot--></slot>

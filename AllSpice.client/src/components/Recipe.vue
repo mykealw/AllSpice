@@ -1,7 +1,7 @@
 <template>
-  <div class="Recipe my-2 position-relative">
-    <img class="rp" :src="recipe.picture" alt="" />
-    <div class="div">
+  <div class="Recipe my-2 position-relative p-0 mx-0">
+    <img class="rp p-0 m-0" :src="recipe.picture" alt="" />
+    <div class="p-0">
       <i
         @click="deleteFavorite(recipe.id)"
         v-if="stonks"
@@ -21,20 +21,18 @@
       ></i>
       <button
         class="btn btn-dark text-light textfont rd1 rd2 action"
-        data-bs-toggle="modal"
-        :data-bs-target="'#see-more' + recipe.id"
         @click="getSteps(recipe.id)"
       >
         Details
       </button>
     </div>
   </div>
-  <Modal :id="'see-more' + recipe.id">
+  <!-- <Modal :id="'see-more' + recipe.id">
     <template #title>
       <span class="text-center text-dark textfont"> Recipe Details</span>
     </template>
     <template #body><RecipeDetails :id="recipe.id" /></template>
-  </Modal>
+  </Modal> -->
 </template>
 
 
@@ -45,6 +43,8 @@ import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
 import { recipesService } from '../services/RecipesService.js'
 import { stepsService } from "../services/StepsService.js";
+import { Modal } from 'bootstrap'
+
 export default {
   props: {
     recipe: {
@@ -81,8 +81,10 @@ export default {
       },
       async getSteps(id) {
         try {
+          AppState.activeRecipe=props.recipe
           await stepsService.getSteps(id)
           await stepsService.getIngredients(id)
+          Modal.getOrCreateInstance(document.getElementById('recipe-modal')).show()
         }
         catch (error) {
           logger.log(error);
@@ -101,6 +103,7 @@ export default {
   width: 100%;
   object-fit: cover;
   border: 3px solid black;
+  padding: 0px;
 }
 
 .rp2 {
