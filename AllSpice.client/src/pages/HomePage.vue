@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 text-light position-relative">
-        <img class="spicy mt-2" src="src\assets\img\allSpice.jpg" alt="" />
+        <img class="spicy mt-2" src="https://images.unsplash.com/photo-1606914469633-bd39206ea739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="" />
         <h1 class="ts position-absolute as1 text-light as2 textfont">
           ALL-SPICE
         </h1>
